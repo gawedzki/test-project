@@ -9,10 +9,11 @@
                 width: 40px;
             }
         </style>
+        
     </head>
 
     <body>
-        <table>
+        <table id="myWorkout">
             <caption>Workout plan</caption>
             <tr>
                 <th></th>
@@ -90,5 +91,23 @@
                 <td><input type="text"></input></td>
             </tr>
         </table>
+
+        <button onClick="myFunction()">Add row!</button>
+
+        <script>
+            function myFunction() {
+                var table = document.getElementById("myWorkout");
+                var rowNumber = table.getElementsByTagName('tr');
+                var colNumber = table.getElementsByTagName('td');
+                var number = colNumber.length / (rowNumber.length - 1);
+                var row = table.insertRow(-1);
+                var cell = row.insertCell();
+                cell.innerHTML = '<select id="exercises" name="exercises"><option value="exercise_1">exercise_1</option><option value="exercise_2">exercise_2</option><option value="exercise_3">exercise_3</option><option value="exercise_4">exercise_4</option></select>';
+                for(i = 1; i < number; i++) {
+                    cell = row.insertCell();
+                    cell.innerHTML = '<input type="text"></input>';
+                }
+            }
+        </script>
     </body>
 </html>
