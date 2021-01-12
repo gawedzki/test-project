@@ -9,10 +9,52 @@
                 width: 40px;
             }
         </style>
-        
     </head>
 
     <body>
+        <div id="table">
+            <table id="myTable"></table>
+        </div>
+        
+        <script>
+            var exercise = {
+                name: "exercise_1",
+                sets: 3,
+                reps: [[40, 8], [50, 7], [60, 6]]
+            }
+            
+            var workoutPlan = [exercise, exercise, exercise];
+            
+            var displayWorkout = "";
+            
+            for(var i = 0; i < workoutPlan.length; i++) {
+                var row = document.createElement("tr"); // creates new table row
+
+                for(var j = 0; j < workoutPlan[i].sets; j++) {
+                    /* creating new table cells */
+                    var weightCell = document.createElement("td");
+                    var repCell = document.createElement("td");
+
+                    /* creates text data from table */
+                    var weightNode = document.createTextNode(workoutPlan[i].reps[j][0] + " kg");
+                    var repNode = document.createTextNode(workoutPlan[i].reps[j][1] + " reps");
+
+                    /* puts text data into created cells */
+                    weightCell.appendChild(weightNode);
+                    repCell.appendChild(repNode);
+
+                    /* adds cells to created row */
+                    row.appendChild(weightCell);
+                    row.appendChild(repCell);
+                }
+                var element = document.getElementById("myTable");
+                element.appendChild(row);
+            }
+        </script>
+
+        </br>
+        </br>
+
         <table id="myWorkout">
             <caption>Workout plan</caption>
             <tr>
@@ -92,17 +134,48 @@
             </tr>
         </table>
 
-        <button onClick="myFunction()">Add row!</button>
+        <button onclick="addRow()">Add row!</button>
+        <button onclick="addColumn()">Add column!</button>
 
         <script>
-            function myFunction() {
+            function addRow() {
                 var table = document.getElementById("myWorkout");
                 var rowNumber = table.getElementsByTagName('tr');
                 var colNumber = table.getElementsByTagName('td');
                 var number = colNumber.length / (rowNumber.length - 1);
                 var row = table.insertRow(-1);
                 var cell = row.insertCell();
-                cell.innerHTML = '<select id="exercises" name="exercises"><option value="exercise_1">exercise_1</option><option value="exercise_2">exercise_2</option><option value="exercise_3">exercise_3</option><option value="exercise_4">exercise_4</option></select>';
+
+                cell.innerHTML =
+                    '<select id="exercises" name="exercises">' +
+                        '<option value="exercise_1">exercise_1</option>' +
+                        '<option value="exercise_2">exercise_2</option>' +
+                        '<option value="exercise_3">exercise_3</option>' +
+                        '<option value="exercise_4">exercise_4</option>' +
+                    '</select>';
+                
+                for(i = 1; i < number; i++) {
+                    cell = row.insertCell();
+                    cell.innerHTML = '<input type="text"></input>';
+                }
+            }
+
+            function addColumn() {
+                var table = document.getElementById("myWorkout");
+                var rowNumber = table.getElementsByTagName('tr');
+                var colNumber = table.getElementsByTagName('td');
+                var number = colNumber.length / (rowNumber.length - 1);
+                var row = table.insert(-1);
+                var cell = row.insertCell();
+
+                cell.innerHTML =
+                    '<select id="exercises" name="exercises">' +
+                        '<option value="exercise_1">exercise_1</option>' +
+                        '<option value="exercise_2">exercise_2</option>' +
+                        '<option value="exercise_3">exercise_3</option>' +
+                        '<option value="exercise_4">exercise_4</option>' +
+                    '</select>';
+                
                 for(i = 1; i < number; i++) {
                     cell = row.insertCell();
                     cell.innerHTML = '<input type="text"></input>';
