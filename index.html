@@ -5,16 +5,20 @@
                 border: 1px solid black;
                 border-collapse: collapse;
             }
+            th, td{
+                width: 50px;
+            }
             input {
-                width: 40px;
+                width: 50px;
             }
         </style>
     </head>
 
     <body>
-        <div id="table">
+        <div id="tableDiv">
             <table id="myTable"></table>
         </div>
+        <button onclick="createNewTable()">Create new workout plan!</button>
         
         <script>
             var exercise = {
@@ -22,28 +26,43 @@
                 sets: 3,
                 reps: [[40, 8], [50, 7], [60, 6]]
             }
-            
-            var workoutPlan = [exercise, exercise, exercise];
-            
-            var displayWorkout = "";
-            
-            for(var i = 0; i < workoutPlan.length; i++) {
-                var row = document.createElement("tr"); // creates new table row
 
-                for(var j = 0; j < workoutPlan[i].sets; j++) {
-                    /* creating new table cells */
+            var workoutPlan = [exercise, exercise, exercise];
+
+            function createNewTable() {
+                var row = document.createElement("tr");
+                var tableExerciseCell = document.createElement("th");
+                tableExerciseCell.innerHTML = "Exercise:";
+                row.appendChild(tableExerciseCell);
+
+                for (var i = 0; i < workoutPlan.length; i++) {
+                    var weightCell = document.createElement("th");
+                    var repCell = document.createElement("th");
+                    weightCell.innerHTML = "Kg:"
+                    repCell.innerHTML = "Reps:";
+                    row.appendChild(weightCell);
+                    row.appendChild(repCell);
+                }
+                var element1 = document.getElementById("myTable");
+                element1.appendChild(row);
+
+                var button = document.createElement("button");
+                button.innerHTML = "Add exercise!";
+                button.onclick = function(){ addRow(); };
+
+                var element2 = document.getElementById("tableDiv");
+                element2.appendChild(button);
+            }
+
+            function addRow() {
+                var row = document.createElement("tr");
+                var exerciseCell = document.createElement("td");
+                exerciseCell.innerHTML = "exercise";
+                row.appendChild(exerciseCell);
+
+                for(var i = 0; i < workoutPlan.length; i++) {
                     var weightCell = document.createElement("td");
                     var repCell = document.createElement("td");
-
-                    /* creates text data from table */
-                    var weightNode = document.createTextNode(workoutPlan[i].reps[j][0] + " kg");
-                    var repNode = document.createTextNode(workoutPlan[i].reps[j][1] + " reps");
-
-                    /* puts text data into created cells */
-                    weightCell.appendChild(weightNode);
-                    repCell.appendChild(repNode);
-
-                    /* adds cells to created row */
                     row.appendChild(weightCell);
                     row.appendChild(repCell);
                 }
@@ -134,11 +153,11 @@
             </tr>
         </table>
 
-        <button onclick="addRow()">Add row!</button>
+        <button onclick="addRow2()">Add row!</button>
         <button onclick="addColumn()">Add column!</button>
 
         <script>
-            function addRow() {
+            function addRow2() {
                 var table = document.getElementById("myWorkout");
                 var rowNumber = table.getElementsByTagName('tr');
                 var colNumber = table.getElementsByTagName('td');
@@ -161,25 +180,6 @@
             }
 
             function addColumn() {
-                var table = document.getElementById("myWorkout");
-                var rowNumber = table.getElementsByTagName('tr');
-                var colNumber = table.getElementsByTagName('td');
-                var number = colNumber.length / (rowNumber.length - 1);
-                var row = table.insert(-1);
-                var cell = row.insertCell();
-
-                cell.innerHTML =
-                    '<select id="exercises" name="exercises">' +
-                        '<option value="exercise_1">exercise_1</option>' +
-                        '<option value="exercise_2">exercise_2</option>' +
-                        '<option value="exercise_3">exercise_3</option>' +
-                        '<option value="exercise_4">exercise_4</option>' +
-                    '</select>';
-                
-                for(i = 1; i < number; i++) {
-                    cell = row.insertCell();
-                    cell.innerHTML = '<input type="text"></input>';
-                }
             }
         </script>
     </body>
