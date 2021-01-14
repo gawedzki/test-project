@@ -1,0 +1,22 @@
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th,
+td {
+  width: 50px;
+}
+th:first-of-type,
+th:first-of-type {
+  width: 100px;
+}
+select {
+  width: 100%;
+  font-weight: bold;
+}
+input {
+  width: 100%;
+  text-align: right;
+}
