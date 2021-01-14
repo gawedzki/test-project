@@ -8,15 +8,21 @@ th,
 td {
   width: 50px;
 }
+th {
+  text-align: left;
+  padding: 0px 5px;
+}
 th:first-of-type,
 th:first-of-type {
   width: 100px;
 }
 select {
   width: 100%;
+  border: 0px;
   font-weight: bold;
 }
 input {
   width: 100%;
+  border: 0px;
   text-align: right;
 }
