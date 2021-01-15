@@ -9,8 +9,8 @@ var exercise = {
 function createNewTable() {
     var row = document.createElement("tr");
     var exerciseCell = document.createElement("th");
-    exerciseCell.innerHTML = "Exercise:";
 
+    exerciseCell.innerHTML = "Exercise:";
     row.appendChild(exerciseCell);
 
     for (var i = 0; i < exercise.sets; i++) {
@@ -34,7 +34,7 @@ function createNewTable() {
 
     var removeSetButton = document.createElement("button");
     removeSetButton.innerHTML = "Remove set!";
-    removeSetButton.onclick = function() { removeSet(); }
+    removeSetButton.onclick = function() { removeSet(); };
 
     var element2 = document.getElementById("tableDiv");
     element2.appendChild(addExerciseButton);
@@ -45,35 +45,37 @@ function createNewTable() {
 
 function addSet() {
     var rows = document.getElementsByTagName("tr");
-
     addHeadCells(rows[0]);
-
     for(var i = 1; i < rows.length; i++) {
         addBodyCells(rows[i]);
     }
-
     exercise.sets++;
 }
 
 function removeSet() {
     var rows = document.getElementsByTagName("tr");
-    for(var i = 0; i < exercise.sets; i++) {
-        rows[i].deleteCell(-1);
-        rows[i].deleteCell(-1);
+    var cells = document.getElementById("myTable").rows[0].cells.length;
+    
+    if(cells > 3) {
+        for(var i = 0; i < rows.length; i++) {
+            rows[i].deleteCell(cells-1);
+            rows[i].deleteCell(cells-2);
+        }
     }
+
     exercise.sets--;
 }
 
 function addRow() {
     var row = document.createElement("tr");
     var exerciseCell = document.createElement("td");
-
     var chooseExercise = document.createElement("select");
+
     for(var i = 0; i <exercisesList.length; i++) {
         chooseExercise.options[i] = new Option(exercisesList[i], exercisesList[i]);
     }
-    exerciseCell.appendChild(chooseExercise);
 
+    exerciseCell.appendChild(chooseExercise);
     row.appendChild(exerciseCell);
 
     for(var i = 0; i < exercise.sets; i++) {
@@ -86,7 +88,9 @@ function addRow() {
 
 function removeRow() {
     var rows = document.getElementsByTagName("tr");
-    document.getElementById("myTable").deleteRow(rows.length-1);
+    if(rows.length > 1) {
+        document.getElementById("myTable").deleteRow(rows.length-1);
+    }
 }
 
 function addHeadCells(row) {
