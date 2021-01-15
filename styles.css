@@ -26,3 +26,23 @@ input {
   border: 0px;
   text-align: right;
 }
+#container {
+  max-width: 800px;
+  border: 1px solid black;
+}
+#tableDiv {
+  border: 1px solid black;
+  display: inline-block;
+  /* max-width: 790px; */
+  width: 100%;
+  margin: auto;
+}
+.tableButtons {
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  line-height: 100%;
+}
+#addExercise {
+  width: 110px;
+}
