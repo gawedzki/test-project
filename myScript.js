@@ -69,12 +69,16 @@ function createNewTable() {
 }
 
 function addSet() {
-    var rows = document.getElementsByTagName("tr");
-    addHeadCells(rows[0]);
-    for(var i = 1; i < rows.length; i++) {
-        addBodyCells(rows[i]);
+    if(exercise.sets <= 20){
+        var rows = document.getElementsByTagName("tr");
+        addHeadCells(rows[0]);
+        for(var i = 1; i < rows.length; i++) {
+            addBodyCells(rows[i]);
+        }
+        exercise.sets++;
+    } else {
+        alert("You go to far... ;)");
     }
-    exercise.sets++;
 }
 
 function removeSet() {
@@ -88,28 +92,33 @@ function removeSet() {
         }
         exercise.sets--;
     }else {
-        alert("Do at least one ;)")
+        alert("Do at least one ;)");
     }
 }
 
 function addRow() {
-    var row = document.createElement("tr");
-    var exerciseCell = document.createElement("td");
-    var chooseExercise = document.createElement("select");
-
-    for(var i = 0; i <exercisesList.length; i++) {
-        chooseExercise.options[i] = new Option(exercisesList[i], exercisesList[i]);
+    var rows = document.getElementsByTagName("tr");
+    if(rows.length <= 10){
+        var row = document.createElement("tr");
+        var exerciseCell = document.createElement("td");
+        var chooseExercise = document.createElement("select");
+    
+        for(var i = 0; i <exercisesList.length; i++) {
+            chooseExercise.options[i] = new Option(exercisesList[i], exercisesList[i]);
+        }
+    
+        exerciseCell.appendChild(chooseExercise);
+        row.appendChild(exerciseCell);
+    
+        for(var i = 0; i < exercise.sets; i++) {
+            addBodyCells(row);
+        }
+    
+        var element = document.getElementById("myTable");
+        element.appendChild(row);
+    } else {
+        alert("Dude... That's to much...");
     }
-
-    exerciseCell.appendChild(chooseExercise);
-    row.appendChild(exerciseCell);
-
-    for(var i = 0; i < exercise.sets; i++) {
-        addBodyCells(row);
-    }
-
-    var element = document.getElementById("myTable");
-    element.appendChild(row);
 }
 
 function removeRow() {
@@ -122,7 +131,7 @@ function removeRow() {
 function addHeadCells(row) {
     var weightCell = document.createElement("th");
     var repCell = document.createElement("th");
-    weightCell.innerHTML = "Kg:"
+    weightCell.innerHTML = "Kg:";
     repCell.innerHTML = "Reps:";
     row.appendChild(weightCell);
     row.appendChild(repCell);

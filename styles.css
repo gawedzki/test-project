@@ -2,19 +2,26 @@ table,
 th,
 td {
   border: 1px solid black;
-  border-collapse: collapse;
+  border-spacing: 5px;
+  border-radius: 4px;
 }
 th,
 td {
-  width: 50px;
+  min-width: 40px;
+  background-color: #ffffff;
+}
+table {
+  width: 100%;
+  background-color: #7e8aa2;
+  background-image: linear-gradient(to bottom right, #7e8aa2, #ffffff);
 }
 th {
   text-align: left;
   padding: 0px 5px;
 }
 th:first-of-type,
-th:first-of-type {
-  width: 100px;
+td:first-of-type {
+  min-width: 100px;
 }
 select {
   width: 100%;
@@ -28,21 +35,35 @@ input {
 }
 #container {
   max-width: 800px;
+  margin: 30px auto;
   border: 1px solid black;
+  background-color: #7e8aa2;
 }
 #tableDiv {
-  border: 1px solid black;
-  display: inline-block;
-  /* max-width: 790px; */
-  width: 100%;
+  width: 99%;
   margin: auto;
+  overflow: auto;
 }
 .tableButtons {
   padding: 0;
   width: 15px;
   height: 15px;
   line-height: 100%;
+  background-color: #3d4c69;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
 }
-#addExercise {
-  width: 110px;
+.tableButtons:hover {
+  background-color: #3d4c6966;
+}
+#tableDiv:empty + #nwButton {
+  display: block;
+  width: 200px;
+  height: 80px;
+  margin: 0 auto;
+}
+#nwButton {
+  display: block;
+  margin: auto;
 }
